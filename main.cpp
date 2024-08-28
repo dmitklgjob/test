@@ -1,26 +1,40 @@
 #include <stdio.h>
 #include <string.h>
-// g++ main.cpp funcTypesEquation.cpp debug.cpp release.cpp SolveEquation.cpp -o out
+#include <stdlib.h>
 
-/**
-        \brief Шаблонная функция извлечения корня из объекта
+int print_array(double x[], int len) {
+        int k;
 
-        \tparam T - любой тип, из которого можно извлечь корень
+        for(k = 0; k < len; k++) {
+            printf("x[%d] = %lf\n", k, x[k]);
+        }
+        return 0;
+}
 
-        \param [in] a Объект для извлечения корня
-
-        \return Новый объект типа *T*, равный корню *a*.
-
-
-        \code{cpp}
-        Math m;
-
-        double d = m.Sqrt(2.542);
-        \endcode
-
-        \warning Не принимает отрицательные значения
-    */
 int main(int argc, char *argv[])
 {
-    printf("ffff");
+        int npoints;        
+        double *points;
+        int k;
+
+        scanf("%d", &npoints); /* npoints получает значение в момент выполнения программы */
+
+        points = (double *)malloc(npoints*sizeof(double));
+        /* Выдели память для хранения npoints элементов, каждый размера sizeof(double) */
+
+        if(points == NULL) {
+           printf("Произошла ошибка. Запросили слишком много памяти??\n");
+           return -1;
+        }
+
+        /* Считываем данные с использованием адресной арифметики */
+        k = 0;
+        while(k < npoints && scanf("%lf", points+k) == 1) {
+            k++;
+        }
+
+        print_array(points, npoints);
+
+        free(points); /* Освободили память */
+        return 0;
 }
